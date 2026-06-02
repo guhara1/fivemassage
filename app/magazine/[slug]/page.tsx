@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ArticleLayout from "@/components/ArticleLayout";
 import { POSTS, getPost, categoryTitle, Post } from "@/lib/magazine";
+import { getArea } from "@/lib/areas";
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
@@ -48,6 +49,9 @@ export default function MagazinePostPage({
   const post = getPost(params.slug);
   if (!post) notFound();
   const related = relatedPosts(post);
+  const areaLinks = (post.areas ?? [])
+    .map((slug) => getArea(slug))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
   return (
     <ArticleLayout
@@ -63,7 +67,41 @@ export default function MagazinePostPage({
         { name: post.title, path: `/magazine/${post.slug}` },
       ]}
       after={
-        related.length > 0 && (
+        <>
+          {areaLinks.length > 0 && (
+            <section className="border-t border-white/5">
+              <div className="container-page py-12">
+                <div className="mx-auto max-w-5xl">
+                  <p className="eyebrow mb-2">AREA</p>
+                  <h2 className="text-2xl font-bold tracking-tight">
+                    이 글과 관련된 지역
+                  </h2>
+                  <p className="mt-2 text-sm text-ivory/55">
+                    아래 지역의 방문 마사지 예약 안내와 가능 여부를 확인할 수
+                    있습니다.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {areaLinks.map((a) => (
+                      <Link
+                        key={a.slug}
+                        href={`/areas/${a.slug}`}
+                        className="card card-hover group inline-flex items-center gap-2 px-4 py-2.5 text-sm"
+                      >
+                        <span className="text-gold/70">📍</span>
+                        <span className="font-medium text-ivory/90 group-hover:text-gold">
+                          {a.name} 방문 마사지 안내
+                        </span>
+                        <span className="text-gold transition group-hover:translate-x-0.5">
+                          →
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+          {related.length > 0 && (
           <section className="border-t border-white/5 bg-white/[0.015]">
             <div className="container-page py-14">
               <div className="mx-auto max-w-5xl">
@@ -111,7 +149,8 @@ export default function MagazinePostPage({
               </div>
             </div>
           </section>
-        )
+          )}
+        </>
       }
     >
       {post.blocks.map((b, i) => (

@@ -21,6 +21,7 @@ export type Post = {
   excerpt: string; // 목록 카드 요약
   lead: string; // 상단 리드
   metaDescription: string;
+  areas?: string[]; // 본문 관련 지역(area slug) — 매거진→지역 문맥 링크
   blocks: Block[];
   related: { label: string; href: string }[]; // 내부링크 (전환 페이지 연결)
 };
@@ -28,6 +29,7 @@ export type Post = {
 export const POSTS: Post[] = [
   {
     slug: "suwon-commuter-fatigue",
+    areas: ["suwon", "suwon-station", "ingye-dong", "yeongtong", "guun-dong"],
     date: "2026-05-08",
     title: "수원에서 서울로 출퇴근하는 직장인의 피로 관리 방법",
     category: "jikjang",
@@ -58,6 +60,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "jeongja-after-work-recovery",
+    areas: ["jeongja-station", "bundang", "migeum-station", "sunae-station", "seohyeon-station"],
     date: "2026-05-12",
     title: "분당 정자역 직장인을 위한 퇴근 후 컨디션 회복 가이드",
     category: "jikjang",
@@ -91,6 +94,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "yeongtong-neck-shoulder-care",
+    areas: ["yeongtong", "suwon", "suwon-station"],
     date: "2026-05-15",
     title: "영통 거주 직장인을 위한 퇴근 후 어깨·목 피로 관리",
     category: "jikjang",
@@ -124,6 +128,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "dongtan-family-weekend-wellness",
+    areas: ["dongtan", "osan", "gwol-dong"],
     date: "2026-05-19",
     title: "동탄 신도시 가족을 위한 주말 방문 웰니스 안내",
     category: "family",
@@ -156,6 +161,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "suji-weekend-homecare",
+    areas: ["suji", "yongin", "dongbaek", "giheung"],
     date: "2026-05-22",
     title: "용인 수지 거주자를 위한 주말 홈케어 준비법",
     category: "family",
@@ -189,6 +195,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "giheung-office-back-care",
+    areas: ["giheung", "singal", "cheoin-gu", "yongin"],
     date: "2026-05-26",
     title: "기흥 오피스 근무자를 위한 어깨·허리 피로 관리법",
     category: "wellness",
