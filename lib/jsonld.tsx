@@ -32,7 +32,7 @@ export function localBusinessLd() {
     },
     areaServed: ["수원", "동탄", "오산", "용인", "분당"],
     description:
-      "쓰리 마사지는 수원·동탄·오산·용인·분당 일부 운영지역 중심의 전화예약 방문 마사지 안내 서비스입니다.",
+      "파이브 마사지는 수원·동탄·오산·용인·분당 일부 운영지역 중심의 전화예약 방문 마사지 안내 서비스입니다.",
   };
 }
 
@@ -57,7 +57,7 @@ export function serviceLd(
     areaServed: ["수원", "동탄", "오산", "용인", "분당"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "쓰리 마사지 프로그램",
+      name: "파이브 마사지 프로그램",
       itemListElement: programs.map((p) => ({
         "@type": "Offer",
         name: p.name,

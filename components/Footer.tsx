@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container-page grid gap-10 py-12 md:grid-cols-3">
         <div>
           <p className="text-lg font-bold">
-            <span className="text-gold">쓰리</span> 마사지
+            <span className="text-gold">파이브</span> 마사지
           </p>
           <p className="mt-3 text-sm leading-relaxed text-ivory/60">
             {SITE.areasShort} 일부 운영지역 중심의 전화예약 방문 마사지 안내

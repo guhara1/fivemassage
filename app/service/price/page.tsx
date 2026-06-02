@@ -8,7 +8,7 @@ import { JsonLd, serviceLd, breadcrumbLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "마사지 가격표 및 프로그램 안내",
   description:
-    "쓰리 마사지의 타이 건식, 아로마 오일, 시그니처 오일, VVIP 전신케어, 스웨디시 프로그램 가격을 안내합니다. 수원·동탄·오산·용인·분당 운영지역 예약은 전화로 확인하세요.",
+    "파이브 마사지의 타이 건식, 아로마 오일, 시그니처 오일, VVIP 전신케어, 스웨디시 프로그램 가격을 안내합니다. 수원·동탄·오산·용인·분당 운영지역 예약은 전화로 확인하세요.",
   alternates: { canonical: "/service/price" },
 };
 
@@ -31,10 +31,10 @@ export default function PricePage() {
             PRICE
           </p>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            쓰리 마사지 프로그램 및 가격 안내
+            파이브 마사지 프로그램 및 가격 안내
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ivory/70">
-            쓰리 마사지는 수원, 동탄, 오산, 용인, 분당 일부 운영지역을 중심으로
+            파이브 마사지는 수원, 동탄, 오산, 용인, 분당 일부 운영지역을 중심으로
             방문 마사지 예약을 안내합니다. 프로그램별 이용 시간과 금액을 확인하신
             뒤, 정확한 가능 지역과 예약 시간은 전화로 문의해 주세요.
           </p>

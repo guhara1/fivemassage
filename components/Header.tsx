@@ -20,7 +20,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-white/5 bg-navy-deep/90 backdrop-blur supports-[backdrop-filter]:bg-navy-deep/75">
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2 font-bold tracking-tight">
-          <span className="text-gold">쓰리</span>
+          <span className="text-gold">파이브</span>
           <span className="text-ivory">마사지</span>
         </Link>
 

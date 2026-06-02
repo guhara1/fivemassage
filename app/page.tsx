@@ -40,7 +40,7 @@ export default function Home() {
             {SITE.areasShort} 출장마사지 예약 안내
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ivory/70 sm:text-lg">
-            쓰리 마사지는 수원, 동탄, 오산, 용인, 분당 일부 운영지역을 중심으로
+            파이브 마사지는 수원, 동탄, 오산, 용인, 분당 일부 운영지역을 중심으로
             전화예약 가능한 방문 마사지 서비스를 안내합니다. 가능지역과 예약 가능
             시간은 전화로 확인해 주세요.
           </p>
@@ -56,7 +56,7 @@ export default function Home() {
       <section id="areas" className="container-page py-16">
         <SectionTitle
           eyebrow="SERVICE AREA"
-          title="쓰리 마사지 운영지역 안내"
+          title="파이브 마사지 운영지역 안내"
           desc="아래 지역을 중심으로 방문 마사지 예약을 안내합니다. 세부 위치와 예약 가능 여부는 전화예약 시 확인해 주세요."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -207,7 +207,7 @@ export default function Home() {
 
       {/* 8. 사업자 신뢰 정보 */}
       <section id="company" className="container-page py-16">
-        <SectionTitle eyebrow="COMPANY" title="쓰리 마사지 사업자 안내" />
+        <SectionTitle eyebrow="COMPANY" title="파이브 마사지 사업자 안내" />
         <div className="mt-6 grid gap-x-8 gap-y-3 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:grid-cols-2">
           {[
             ["상호", SITE.name],
@@ -231,7 +231,7 @@ export default function Home() {
         <div className="container-page py-16">
           <SectionTitle
             eyebrow="MAGAZINE"
-            title="쓰리 마사지 매거진"
+            title="파이브 마사지 매거진"
             desc="예약과 컨디션 관리에 도움이 되는 정보성 콘텐츠를 준비하고 있습니다."
           />
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,7 +1,7 @@
-// 쓰리 마사지 사이트 공통 데이터
+// 파이브 마사지 사이트 공통 데이터
 
 export const SITE = {
-  name: "쓰리 마사지",
+  name: "파이브 마사지",
   company: "YH LAB",
   ceo: "김유환",
   bizNo: "815-26-00585",
@@ -118,7 +118,7 @@ export const PROGRAMS: Program[] = [
     slug: "signature-oil",
     name: "시그니처 오일",
     category: "SIGNATURE · 오일",
-    desc: "쓰리 마사지의 대표 오일 케어. 강도보다 흐름과 안정감에 집중한 프리미엄 휴식 프로그램.",
+    desc: "파이브 마사지의 대표 오일 케어. 강도보다 흐름과 안정감에 집중한 프리미엄 휴식 프로그램.",
     prices: [
       { duration: "60분", price: 100000 },
       { duration: "90분", price: 120000 },
@@ -210,7 +210,7 @@ export const MAIN_FAQ = [
   },
   {
     q: "어떤 목적의 서비스인가요?",
-    a: "쓰리 마사지는 휴식과 컨디션 관리를 위한 건전한 방문 마사지 예약 안내 서비스입니다.",
+    a: "파이브 마사지는 휴식과 컨디션 관리를 위한 건전한 방문 마사지 예약 안내 서비스입니다.",
   },
 ];
 

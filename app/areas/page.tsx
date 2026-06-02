@@ -8,7 +8,7 @@ import { JsonLd, breadcrumbLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "가능지역 안내",
   description:
-    "쓰리 마사지 방문 마사지 가능지역을 권역별로 안내합니다. 수원권, 동탄·오산권, 용인권, 분당권 운영지역을 확인하고 전화로 예약 가능 여부를 문의하세요.",
+    "파이브 마사지 방문 마사지 가능지역을 권역별로 안내합니다. 수원권, 동탄·오산권, 용인권, 분당권 운영지역을 확인하고 전화로 예약 가능 여부를 문의하세요.",
   alternates: { canonical: "/areas" },
 };
 
@@ -28,10 +28,10 @@ export default function AreasPage() {
             SERVICE AREA
           </p>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            쓰리 마사지 가능지역 안내
+            파이브 마사지 가능지역 안내
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ivory/70">
-            쓰리 마사지는 {SITE.areasShort} 일부 권역을 중심으로 방문 마사지
+            파이브 마사지는 {SITE.areasShort} 일부 권역을 중심으로 방문 마사지
             예약을 안내합니다. 세부 위치와 예약 가능 여부는 전화예약 시 확인해
             주세요.
           </p>
