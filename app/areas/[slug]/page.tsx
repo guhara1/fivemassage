@@ -4,6 +4,7 @@ import Link from "next/link";
 import CallButton, { LinkButton } from "@/components/CallButton";
 import SectionTitle from "@/components/SectionTitle";
 import Faq from "@/components/Faq";
+import Reviews from "@/components/Reviews";
 import {
   SITE,
   PROGRAMS,
@@ -173,13 +174,25 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
         </p>
       </section>
 
-      {/* FAQ */}
+      {/* 이용 후기 */}
       <section className="border-y border-white/5 bg-white/[0.015]">
         <div className="container-page py-12">
-          <SectionTitle title={`${area.name} 출장마사지 자주 묻는 질문`} />
+          <SectionTitle
+            title={`${area.name} 이용 후기`}
+            eyebrow="REVIEW"
+            desc="실제 이용 상황을 바탕으로 한 후기 예시입니다."
+          />
           <div className="mt-6">
-            <Faq items={area.faq} />
+            <Reviews areaName={area.name} reviews={area.reviews} />
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="container-page py-12">
+        <SectionTitle title={`${area.name} 출장마사지 자주 묻는 질문`} />
+        <div className="mt-6">
+          <Faq items={area.faq} />
         </div>
       </section>
 

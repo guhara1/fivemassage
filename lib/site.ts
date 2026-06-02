@@ -15,12 +15,10 @@ export const SITE = {
   updated: "2026-06-02",
 };
 
-// 권역별 지역. slug 가 있는 지역만 자체 상세 페이지를 가진다.
-// 세부 동네는 우선 권역 대표 페이지로 연결하고, 유입 데이터 확인 후 확장한다.
+// 권역별 지역. 모든 지역이 자체 상세 페이지(slug)를 가진다.
 export type Region = {
   name: string;
-  slug?: string; // 자체 페이지가 있으면 지정
-  parent?: string; // 자체 페이지가 없을 때 연결할 대표 지역 slug
+  slug: string;
 };
 
 export type RegionGroup = {
@@ -35,10 +33,10 @@ export const REGION_GROUPS: RegionGroup[] = [
     title: "수원권",
     regions: [
       { name: "수원", slug: "suwon" },
-      { name: "영통", parent: "suwon" },
-      { name: "수원역", parent: "suwon" },
-      { name: "인계동", parent: "suwon" },
-      { name: "구운동", parent: "suwon" },
+      { name: "영통", slug: "yeongtong" },
+      { name: "수원역", slug: "suwon-station" },
+      { name: "인계동", slug: "ingye-dong" },
+      { name: "구운동", slug: "guun-dong" },
     ],
   },
   {
@@ -47,7 +45,7 @@ export const REGION_GROUPS: RegionGroup[] = [
     regions: [
       { name: "동탄", slug: "dongtan" },
       { name: "오산", slug: "osan" },
-      { name: "궐동", parent: "osan" },
+      { name: "궐동", slug: "gwol-dong" },
     ],
   },
   {
@@ -55,12 +53,12 @@ export const REGION_GROUPS: RegionGroup[] = [
     title: "용인권",
     regions: [
       { name: "용인", slug: "yongin" },
-      { name: "처인구", parent: "yongin" },
-      { name: "수지", parent: "yongin" },
-      { name: "포곡", parent: "yongin" },
-      { name: "신갈", parent: "yongin" },
-      { name: "기흥", parent: "yongin" },
-      { name: "동백", parent: "yongin" },
+      { name: "처인구", slug: "cheoin-gu" },
+      { name: "수지", slug: "suji" },
+      { name: "포곡", slug: "pogok" },
+      { name: "신갈", slug: "singal" },
+      { name: "기흥", slug: "giheung" },
+      { name: "동백", slug: "dongbaek" },
     ],
   },
   {
@@ -68,19 +66,17 @@ export const REGION_GROUPS: RegionGroup[] = [
     title: "분당권",
     regions: [
       { name: "분당", slug: "bundang" },
-      { name: "미금역", parent: "bundang" },
-      { name: "수내역", parent: "bundang" },
-      { name: "정자역", parent: "bundang" },
-      { name: "서현역", parent: "bundang" },
+      { name: "미금역", slug: "migeum-station" },
+      { name: "수내역", slug: "sunae-station" },
+      { name: "정자역", slug: "jeongja-station" },
+      { name: "서현역", slug: "seohyeon-station" },
     ],
   },
 ];
 
 // 메뉴/카드에서 지역 링크 목적지 계산
 export function regionHref(region: Region): string {
-  if (region.slug) return `/areas/${region.slug}`;
-  if (region.parent) return `/areas/${region.parent}`;
-  return "/areas";
+  return `/areas/${region.slug}`;
 }
 
 // ---- 프로그램 / 가격 ----
