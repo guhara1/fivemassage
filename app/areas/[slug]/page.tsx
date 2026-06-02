@@ -200,7 +200,7 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
         <div className="mt-6 flex flex-wrap gap-4 text-sm text-gold">
           <Link href="/service/price" className="hover:underline">가격표 보기 →</Link>
           <Link href="/areas" className="hover:underline">전체 가능지역 보기 →</Link>
-          <Link href="/#faq" className="hover:underline">자주 묻는 질문 →</Link>
+          <Link href="/faq" className="hover:underline">자주 묻는 질문 →</Link>
         </div>
       </section>
 

@@ -11,6 +11,8 @@ export const SITE = {
   // 운영 도메인이 정해지면 NEXT_PUBLIC_SITE_URL 로 교체
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://three-massage.example",
   areasShort: "수원·동탄·오산·용인·분당",
+  // 콘텐츠 최종 점검일 (구조화 데이터 dateModified / 바이라인 표기용)
+  updated: "2026-06-02",
 };
 
 // 권역별 지역. slug 가 있는 지역만 자체 상세 페이지를 가진다.

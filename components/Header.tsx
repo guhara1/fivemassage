@@ -5,11 +5,12 @@ import { useState } from "react";
 import { SITE, REGION_GROUPS, regionHref } from "@/lib/site";
 
 const SERVICE_LINKS = [
-  { label: "출장마사지 안내", href: "/#service" },
-  { label: "프로그램 안내", href: "/#service" },
+  { label: "서비스 안내 전체", href: "/service" },
+  { label: "출장마사지 안내", href: "/service/visit-massage" },
+  { label: "프로그램 안내", href: "/service/programs" },
   { label: "가격표", href: "/service/price" },
-  { label: "이용절차", href: "/#process" },
-  { label: "예약 전 확인사항", href: "/#notes" },
+  { label: "이용절차", href: "/service/process" },
+  { label: "예약 전 확인사항", href: "/service/notes" },
 ];
 
 export default function Header() {
@@ -59,8 +60,8 @@ export default function Header() {
           </DropNav>
 
           <NavLink href="/areas">가능지역</NavLink>
-          <NavLink href="/#faq">FAQ</NavLink>
-          <NavLink href="/#company">회사소개</NavLink>
+          <NavLink href="/faq">FAQ</NavLink>
+          <NavLink href="/about">회사소개</NavLink>
 
           <a
             href={SITE.phoneTel}
@@ -143,10 +144,10 @@ export default function Header() {
             <MobileLink href="/areas" onClick={() => setOpen(false)}>
               가능지역 전체보기
             </MobileLink>
-            <MobileLink href="/#faq" onClick={() => setOpen(false)}>
+            <MobileLink href="/faq" onClick={() => setOpen(false)}>
               FAQ
             </MobileLink>
-            <MobileLink href="/#company" onClick={() => setOpen(false)}>
+            <MobileLink href="/about" onClick={() => setOpen(false)}>
               회사소개
             </MobileLink>
           </nav>

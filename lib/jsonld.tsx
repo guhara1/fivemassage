@@ -90,6 +90,34 @@ export function faqLd(faqs: { q: string; a: string }[]) {
   };
 }
 
+export function articleLd({
+  title,
+  description,
+  path,
+  dateModified,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  dateModified: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    inLanguage: "ko-KR",
+    mainEntityOfPage: { "@type": "WebPage", "@id": SITE.url + path },
+    author: { "@type": "Organization", name: SITE.name },
+    publisher: {
+      "@type": "Organization",
+      name: SITE.name,
+      legalName: SITE.company,
+    },
+    dateModified,
+  };
+}
+
 export function breadcrumbLd(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

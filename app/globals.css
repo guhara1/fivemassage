@@ -29,3 +29,77 @@ body {
     @apply min-h-[56px] inline-flex items-center justify-center;
   }
 }
+
+/* 본문 가독성 타이포그래피 (시인성·가독성 중심) */
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  color: rgba(245, 241, 232, 0.82);
+  word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
+  overflow-wrap: break-word;
+}
+.prose > * + * {
+  margin-top: 1.15rem;
+}
+.prose h2 {
+  margin-top: 2.6rem;
+  margin-bottom: 0.2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #f5f1e8;
+  scroll-margin-top: 5rem;
+}
+.prose h2::before {
+  content: "";
+  display: block;
+  width: 2.25rem;
+  height: 3px;
+  border-radius: 9999px;
+  background: #c8a35a;
+  margin-bottom: 0.85rem;
+}
+.prose h3 {
+  margin-top: 1.8rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #e0c389;
+}
+.prose strong {
+  color: #f5f1e8;
+  font-weight: 700;
+}
+.prose a {
+  color: #e0c389;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose ul {
+  list-style: none;
+  padding-left: 0;
+}
+.prose ul > li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin-top: 0.55rem;
+}
+.prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.1rem;
+  top: 0.75rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #c8a35a;
+}
+.prose .callout {
+  border: 1px solid rgba(200, 163, 90, 0.35);
+  background: rgba(200, 163, 90, 0.06);
+  border-radius: 1rem;
+  padding: 1.1rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(245, 241, 232, 0.78);
+}
+
