@@ -15,6 +15,7 @@ export type Block = { h2?: string; p?: string; ul?: string[] };
 
 export type Post = {
   slug: string;
+  date: string; // 발행일 YYYY-MM-DD
   title: string;
   category: string; // MagCategory.slug
   excerpt: string; // 목록 카드 요약
@@ -27,6 +28,7 @@ export type Post = {
 export const POSTS: Post[] = [
   {
     slug: "suwon-commuter-fatigue",
+    date: "2026-05-08",
     title: "수원에서 서울로 출퇴근하는 직장인의 피로 관리 방법",
     category: "jikjang",
     excerpt:
@@ -49,6 +51,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "jeongja-after-work-recovery",
+    date: "2026-05-12",
     title: "분당 정자역 직장인을 위한 퇴근 후 컨디션 회복 가이드",
     category: "jikjang",
     excerpt:
@@ -71,6 +74,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "yeongtong-neck-shoulder-care",
+    date: "2026-05-15",
     title: "영통 거주 직장인을 위한 퇴근 후 어깨·목 피로 관리",
     category: "jikjang",
     excerpt:
@@ -93,6 +97,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "dongtan-family-weekend-wellness",
+    date: "2026-05-19",
     title: "동탄 신도시 가족을 위한 주말 방문 웰니스 안내",
     category: "family",
     excerpt:
@@ -115,6 +120,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "suji-weekend-homecare",
+    date: "2026-05-22",
     title: "용인 수지 거주자를 위한 주말 홈케어 준비법",
     category: "family",
     excerpt:
@@ -137,6 +143,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "giheung-office-back-care",
+    date: "2026-05-26",
     title: "기흥 오피스 근무자를 위한 어깨·허리 피로 관리법",
     category: "wellness",
     excerpt:
@@ -159,6 +166,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "first-visit-checklist",
+    date: "2026-04-28",
     title: "출장마사지 처음 이용 전 확인해야 할 7가지",
     category: "guide",
     excerpt:
@@ -180,6 +188,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "phone-reservation-process",
+    date: "2026-05-02",
     title: "방문 마사지 전화예약은 어떻게 진행될까",
     category: "guide",
     excerpt:
@@ -202,6 +211,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "safe-visit-massage-standard",
+    date: "2026-05-29",
     title: "건전한 방문 마사지 서비스를 구분하는 기준",
     category: "safety",
     excerpt:

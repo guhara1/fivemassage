@@ -95,11 +95,13 @@ export function articleLd({
   description,
   path,
   dateModified,
+  datePublished,
 }: {
   title: string;
   description: string;
   path: string;
   dateModified: string;
+  datePublished?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -114,6 +116,7 @@ export function articleLd({
       name: SITE.name,
       legalName: SITE.company,
     },
+    datePublished: datePublished ?? dateModified,
     dateModified,
   };
 }

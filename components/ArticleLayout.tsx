@@ -14,6 +14,7 @@ export default function ArticleLayout({
   crumbs,
   children,
   toc,
+  datePublished,
 }: {
   eyebrow: string;
   title: string;
@@ -23,6 +24,7 @@ export default function ArticleLayout({
   crumbs: Crumb[];
   children: React.ReactNode;
   toc?: { id: string; label: string }[];
+  datePublished?: string;
 }) {
   const breadcrumb: Crumb[] = [{ name: "홈", path: "/" }, ...crumbs];
 
@@ -30,7 +32,13 @@ export default function ArticleLayout({
     <>
       <JsonLd
         data={[
-          articleLd({ title, description, path, dateModified: SITE.updated }),
+          articleLd({
+            title,
+            description,
+            path,
+            dateModified: SITE.updated,
+            datePublished,
+          }),
           breadcrumbLd(breadcrumb),
         ]}
       />
@@ -71,6 +79,14 @@ export default function ArticleLayout({
                 {SITE.name} 운영팀 ({SITE.company})
               </span>
             </span>
+            {datePublished && (
+              <span>
+                발행{" "}
+                <time dateTime={datePublished}>
+                  {datePublished.replace(/-/g, ".")}
+                </time>
+              </span>
+            )}
             <span>최종 점검 {SITE.updated}</span>
             <Link href="/about" className="text-gold/80 hover:text-gold">
               운영 정보 보기

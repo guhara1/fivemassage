@@ -37,6 +37,7 @@ export default function MagazinePostPage({
       lead={post.lead}
       path={`/magazine/${post.slug}`}
       description={post.metaDescription}
+      datePublished={post.date}
       crumbs={[
         { name: "매거진", path: "/magazine" },
         { name: post.title, path: `/magazine/${post.slug}` },

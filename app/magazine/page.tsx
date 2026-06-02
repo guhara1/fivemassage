@@ -78,9 +78,14 @@ export default function MagazinePage() {
                   href={`/magazine/${p.slug}`}
                   className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition hover:border-gold/50"
                 >
-                  <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-                    {c.title}
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-gold">
+                      {c.title}
+                    </span>
+                    <time dateTime={p.date} className="text-xs text-ivory/40">
+                      {p.date.replace(/-/g, ".")}
+                    </time>
+                  </div>
                   <h3 className="mt-2 font-bold leading-snug text-ivory group-hover:text-gold">
                     {p.title}
                   </h3>
