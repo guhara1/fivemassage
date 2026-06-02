@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import CallButton, { LinkButton } from "@/components/CallButton";
 import SectionTitle from "@/components/SectionTitle";
@@ -16,6 +17,16 @@ import {
 } from "@/lib/site";
 import { JsonLd, faqLd, serviceLd, breadcrumbLd } from "@/lib/jsonld";
 import { POSTS, categoryTitle } from "@/lib/magazine";
+
+// 메인페이지에만 검색엔진 소유확인 메타태그 적용
+export const metadata: Metadata = {
+  verification: {
+    google: "-yBpnRHdLeEIFt3DyEwEF2p-oyRGGgGao28i2Lu5X-I",
+    other: {
+      "naver-site-verification": "bb93e6b8cbd86fafebf61b9a57109af1977ec943",
+    },
+  },
+};
 
 const featured = PROGRAMS.filter((p) => FEATURED_PROGRAM_SLUGS.includes(p.slug));
 
