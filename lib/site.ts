@@ -8,8 +8,8 @@ export const SITE = {
   address: "경기도 파주시 청석로 268",
   phoneDisplay: "0508-202-4717",
   phoneTel: "tel:05082024717",
-  // 운영 도메인이 정해지면 NEXT_PUBLIC_SITE_URL 로 교체
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://three-massage.example",
+  // 운영 도메인
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://5massage.xyz",
   areasShort: "수원·동탄·오산·용인·분당",
   // 콘텐츠 최종 점검일 (구조화 데이터 dateModified / 바이라인 표기용)
   updated: "2026-06-02",
