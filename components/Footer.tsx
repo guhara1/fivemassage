@@ -4,7 +4,7 @@ import { SITE, REGION_GROUPS, regionHref } from "@/lib/site";
 export default function Footer({ logoSrc }: { logoSrc?: string | null }) {
   return (
     <footer className="border-t border-white/5 bg-navy-deep">
-      <div className="container-page grid gap-10 py-12 md:grid-cols-3">
+      <div className="container-page grid gap-10 py-12 md:grid-cols-4">
         <div>
           {logoSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -30,6 +30,30 @@ export default function Footer({ logoSrc }: { logoSrc?: string | null }) {
           >
             {SITE.phoneDisplay}
           </a>
+        </div>
+
+        <div>
+          <p className="mb-3 text-sm font-semibold text-ivory">바로가기</p>
+          <ul className="space-y-2 text-sm text-ivory/60">
+            {[
+              ["서비스 안내", "/service"],
+              ["출장마사지 안내", "/service/visit-massage"],
+              ["프로그램 안내", "/service/programs"],
+              ["요금 안내", "/service/price"],
+              ["이용절차", "/service/process"],
+              ["예약 전 확인사항", "/service/notes"],
+              ["가능지역", "/areas"],
+              ["매거진", "/magazine"],
+              ["자주 묻는 질문", "/faq"],
+              ["회사소개", "/about"],
+            ].map(([label, href]) => (
+              <li key={href}>
+                <Link href={href} className="hover:text-ivory">
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>

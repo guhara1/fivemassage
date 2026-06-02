@@ -321,6 +321,35 @@ export const POSTS: Post[] = [
   },
 ];
 
+// 지역페이지 → 관련 매거진 글 매핑 (지역 코히런스 + 일반 가이드 분산 노출)
+const AREA_GUIDE_POSTS: Record<string, string[]> = {
+  suwon: ["suwon-commuter-fatigue", "first-visit-checklist"],
+  yeongtong: ["yeongtong-neck-shoulder-care", "phone-reservation-process"],
+  "suwon-station": ["suwon-commuter-fatigue", "first-visit-checklist"],
+  "ingye-dong": ["suwon-commuter-fatigue", "safe-visit-massage-standard"],
+  "guun-dong": ["first-visit-checklist", "suji-weekend-homecare"],
+  dongtan: ["dongtan-family-weekend-wellness", "phone-reservation-process"],
+  osan: ["first-visit-checklist", "phone-reservation-process"],
+  "gwol-dong": ["first-visit-checklist", "safe-visit-massage-standard"],
+  yongin: ["suji-weekend-homecare", "first-visit-checklist"],
+  "cheoin-gu": ["giheung-office-back-care", "safe-visit-massage-standard"],
+  suji: ["suji-weekend-homecare", "first-visit-checklist"],
+  pogok: ["suji-weekend-homecare", "phone-reservation-process"],
+  singal: ["giheung-office-back-care", "first-visit-checklist"],
+  giheung: ["giheung-office-back-care", "phone-reservation-process"],
+  dongbaek: ["dongtan-family-weekend-wellness", "first-visit-checklist"],
+  bundang: ["jeongja-after-work-recovery", "first-visit-checklist"],
+  "migeum-station": ["jeongja-after-work-recovery", "safe-visit-massage-standard"],
+  "sunae-station": ["jeongja-after-work-recovery", "phone-reservation-process"],
+  "jeongja-station": ["jeongja-after-work-recovery", "first-visit-checklist"],
+  "seohyeon-station": ["jeongja-after-work-recovery", "safe-visit-massage-standard"],
+};
+
+export function postsForArea(areaSlug: string): Post[] {
+  const slugs = AREA_GUIDE_POSTS[areaSlug] ?? ["first-visit-checklist"];
+  return slugs.map(getPost).filter((p): p is Post => Boolean(p));
+}
+
 export function getPost(slug: string): Post | undefined {
   return POSTS.find((p) => p.slug === slug);
 }

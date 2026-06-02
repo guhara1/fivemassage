@@ -13,6 +13,7 @@ import {
   regionHref,
 } from "@/lib/site";
 import { AREAS, getArea } from "@/lib/areas";
+import { postsForArea, categoryTitle } from "@/lib/magazine";
 import { JsonLd, breadcrumbLd, faqLd, localBusinessLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
@@ -65,6 +66,7 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
     g.regions.some((r) => r.slug === area.slug)
   );
   const related = sameGroup?.regions.filter((r) => r.name !== area.name) ?? [];
+  const guidePosts = postsForArea(area.slug);
 
   return (
     <>
@@ -283,8 +285,45 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      {/* ── 관련 지역 ── */}
+      {/* ── 관련 매거진 ── */}
       <section className="container-page py-14">
+        <SectionTitle
+          eyebrow="MAGAZINE"
+          title="관련 매거진"
+          desc="예약 안내가 아닌, 생활상황에 맞춘 피로 관리·이용 정보입니다."
+        />
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          {guidePosts.map((p) => (
+            <Link
+              key={p.slug}
+              href={`/magazine/${p.slug}`}
+              className="card card-hover group flex flex-col p-5"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold uppercase tracking-wide text-gold">
+                  {categoryTitle(p.category)}
+                </span>
+                <time dateTime={p.date} className="text-xs text-ivory/40">
+                  {p.date.replace(/-/g, ".")}
+                </time>
+              </div>
+              <h3 className="mt-3 flex-1 font-bold leading-snug text-ivory group-hover:text-gold">
+                {p.title}
+              </h3>
+              <span className="mt-4 text-sm text-gold">자세히 보기 →</span>
+            </Link>
+          ))}
+        </div>
+        <p className="mt-4 text-sm">
+          <Link href="/magazine" className="text-gold hover:underline">
+            매거진 전체보기 →
+          </Link>
+        </p>
+      </section>
+
+      {/* ── 관련 지역 ── */}
+      <section className="border-t border-white/5 py-14">
+        <div className="container-page">
         <SectionTitle eyebrow="NEARBY" title={`${area.group} 인근 운영지역`} />
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((r) => (
@@ -313,8 +352,10 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
         <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gold">
           <Link href="/service/price" className="hover:underline">가격표 보기 →</Link>
           <Link href="/service/process" className="hover:underline">이용절차 보기 →</Link>
+          <Link href="/service/visit-massage" className="hover:underline">출장마사지 안내 →</Link>
           <Link href="/areas" className="hover:underline">전체 가능지역 보기 →</Link>
           <Link href="/faq" className="hover:underline">자주 묻는 질문 →</Link>
+        </div>
         </div>
       </section>
 

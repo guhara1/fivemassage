@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CallButton, { LinkButton } from "@/components/CallButton";
 import SectionTitle from "@/components/SectionTitle";
 import ProgramCard from "@/components/ProgramCard";
@@ -73,6 +74,37 @@ export default function PricePage() {
             <CallButton />
             <LinkButton href="/areas">가능지역 보기</LinkButton>
           </div>
+        </div>
+      </section>
+
+      {/* 함께 보기 (내부링크) */}
+      <section className="container-page py-12">
+        <SectionTitle title="함께 보기" eyebrow="MORE" />
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            ["출장마사지 안내", "방문형 마사지 소개", "/service/visit-massage"],
+            ["프로그램 안내", "프로그램별 특징·선택 기준", "/service/programs"],
+            ["이용절차", "전화 문의부터 방문까지", "/service/process"],
+            ["예약 전 확인사항", "주소·출입·주차 준비", "/service/notes"],
+            ["가능지역", "권역별 운영지역 안내", "/areas"],
+            ["자주 묻는 질문", "예약·지역 FAQ", "/faq"],
+          ].map(([label, desc, href]) => (
+            <Link
+              key={href}
+              href={href}
+              className="card card-hover group flex items-center justify-between p-4"
+            >
+              <span>
+                <span className="block font-semibold text-ivory/90 group-hover:text-gold">
+                  {label}
+                </span>
+                <span className="block text-xs text-ivory/50">{desc}</span>
+              </span>
+              <span className="text-gold transition group-hover:translate-x-0.5">
+                →
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
     </>
