@@ -193,7 +193,7 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
               href={regionHref(r)}
               className="rounded-full border border-white/10 px-3 py-1.5 text-sm text-ivory/80 hover:border-gold/50 hover:text-ivory"
             >
-              {r.name} 출장마사지
+              {r.name}
             </Link>
           ))}
         </div>

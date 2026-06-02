@@ -48,7 +48,7 @@ export default function Header() {
                           href={regionHref(r)}
                           className="block rounded px-2 py-1 text-sm text-ivory/80 hover:bg-white/5 hover:text-ivory"
                         >
-                          {r.name} 출장마사지
+                          {r.name}
                         </Link>
                       </li>
                     ))}
@@ -130,7 +130,7 @@ export default function Header() {
                             onClick={() => setOpen(false)}
                             className="block rounded px-4 py-2 text-sm text-ivory/75 hover:bg-white/5"
                           >
-                            {r.name} 출장마사지
+                            {r.name}
                           </Link>
                         </li>
                       ))}
