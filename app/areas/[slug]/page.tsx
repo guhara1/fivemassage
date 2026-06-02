@@ -100,25 +100,36 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
         </p>
       </section>
 
-      {/* 예약 전 확인사항 */}
+      {/* 지역 특화 방문 메모 (고유 콘텐츠) */}
       <section className="border-y border-white/5 bg-white/[0.015]">
         <div className="container-page py-12">
-          <SectionTitle title={`${area.name}에서 예약 전 확인해야 할 점`} />
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/60">
-            {area.checklistNote}
+          <SectionTitle
+            eyebrow="LOCAL"
+            title={`${area.name} 방문, 이런 점이 다릅니다`}
+          />
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-ivory/75">
+            {area.localGuide}
           </p>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {CHECKLIST.map((c) => (
-              <li
-                key={c}
-                className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-ivory/75"
-              >
-                <span className="text-gold">✓</span>
-                <span>{c}</span>
-              </li>
-            ))}
-          </ul>
         </div>
+      </section>
+
+      {/* 예약 전 확인사항 */}
+      <section className="container-page py-12">
+        <SectionTitle title={`${area.name}에서 예약 전 확인해야 할 점`} />
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/60">
+          {area.checklistNote}
+        </p>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {CHECKLIST.map((c) => (
+            <li
+              key={c}
+              className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-ivory/75"
+            >
+              <span className="text-gold">✓</span>
+              <span>{c}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* 이용 가능한 프로그램 (요약 + 가격표 링크) */}
