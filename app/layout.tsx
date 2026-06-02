@@ -51,7 +51,7 @@ export default function RootLayout({
         <JsonLd data={[organizationLd(), localBusinessLd(), websiteLd()]} />
         <Header logoSrc={logoSrc} />
         <main>{children}</main>
-        <Footer />
+        <Footer logoSrc={logoSrc} />
         <MobileBottomBar />
         <FloatingCall />
       </body>

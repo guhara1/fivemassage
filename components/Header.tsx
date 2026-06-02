@@ -46,7 +46,13 @@ export default function Header({ logoSrc }: { logoSrc?: string | null }) {
           {logoSrc ? (
             // public/ 에 로고 파일이 있으면 빌드 시 이미지로 표시 (없으면 텍스트)
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={logoSrc} alt="파이브 마사지" className="h-9 w-auto" />
+            <img
+              src={logoSrc}
+              alt="파이브 마사지"
+              width={640}
+              height={213}
+              className="h-10 w-auto sm:h-12"
+            />
           ) : (
             <>
               <span className="text-gold">파이브</span>

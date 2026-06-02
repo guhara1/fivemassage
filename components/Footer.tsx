@@ -1,14 +1,25 @@
 import Link from "next/link";
 import { SITE, REGION_GROUPS, regionHref } from "@/lib/site";
 
-export default function Footer() {
+export default function Footer({ logoSrc }: { logoSrc?: string | null }) {
   return (
     <footer className="border-t border-white/5 bg-navy-deep">
       <div className="container-page grid gap-10 py-12 md:grid-cols-3">
         <div>
-          <p className="text-lg font-bold">
-            <span className="text-gold">파이브</span> 마사지
-          </p>
+          {logoSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={logoSrc}
+              alt="파이브 마사지"
+              width={640}
+              height={213}
+              className="h-12 w-auto"
+            />
+          ) : (
+            <p className="text-lg font-bold">
+              <span className="text-gold">파이브</span> 마사지
+            </p>
+          )}
           <p className="mt-3 text-sm leading-relaxed text-ivory/60">
             {SITE.areasShort} 일부 운영지역 중심의 전화예약 방문 마사지 안내
             서비스입니다.
