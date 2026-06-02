@@ -205,24 +205,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. 사업자 신뢰 정보 */}
+      {/* 8. 신뢰 안내 (상세 사업자 정보는 푸터/회사소개 페이지에) */}
       <section id="company" className="container-page py-16">
-        <SectionTitle eyebrow="COMPANY" title="파이브 마사지 사업자 안내" />
-        <div className="mt-6 grid gap-x-8 gap-y-3 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:grid-cols-2">
-          {[
-            ["상호", SITE.name],
-            ["운영사", SITE.company],
-            ["대표", SITE.ceo],
-            ["사업자등록번호", SITE.bizNo],
-            ["주소", SITE.address],
-            ["전화예약", SITE.phoneDisplay],
-            ["운영지역", "수원, 동탄, 오산, 용인, 분당 일부 권역"],
-          ].map(([k, v]) => (
-            <div key={k} className="flex gap-3 text-sm">
-              <span className="w-28 shrink-0 text-ivory/50">{k}</span>
-              <span className="text-ivory/90">{v}</span>
-            </div>
-          ))}
+        <div className="flex flex-col items-start justify-between gap-5 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:flex-row sm:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              COMPANY
+            </p>
+            <p className="mt-2 text-lg font-bold text-ivory">
+              {SITE.name} · {SITE.company}
+            </p>
+            <p className="mt-1 text-sm text-ivory/60">
+              휴식·컨디션 관리를 위한 건전한 방문 마사지 안내 서비스입니다. 운영
+              주체와 사업자 정보를 투명하게 공개합니다.
+            </p>
+          </div>
+          <LinkButton href="/about">회사소개 보기</LinkButton>
         </div>
       </section>
 
