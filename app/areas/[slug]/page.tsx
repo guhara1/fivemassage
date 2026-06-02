@@ -28,7 +28,7 @@ export function generateMetadata({
   const area = getArea(params.slug);
   if (!area) return {};
   return {
-    title: `${area.name} 출장마사지 예약 안내`,
+    title: area.seoTitle,
     description: area.metaDescription,
     alternates: { canonical: `/areas/${area.slug}` },
   };
