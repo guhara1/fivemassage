@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CallButton from "@/components/CallButton";
-import { JsonLd, breadcrumbLd } from "@/lib/jsonld";
-import { MAG_CATEGORIES, postsByCategory } from "@/lib/magazine";
+import { JsonLd, breadcrumbLd, itemListLd } from "@/lib/jsonld";
+import { MAG_CATEGORIES, postsByCategory, POSTS } from "@/lib/magazine";
 
 const PATH = "/magazine";
 
@@ -17,10 +17,19 @@ export default function MagazinePage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbLd([
-          { name: "홈", path: "/" },
-          { name: "매거진", path: PATH },
-        ])}
+        data={[
+          itemListLd(
+            "파이브 마사지 매거진",
+            POSTS.map((p) => ({
+              name: p.title,
+              path: `/magazine/${p.slug}`,
+            }))
+          ),
+          breadcrumbLd([
+            { name: "홈", path: "/" },
+            { name: "매거진", path: PATH },
+          ]),
+        ]}
       />
 
       <section className="border-b border-white/5">

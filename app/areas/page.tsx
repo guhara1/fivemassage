@@ -3,7 +3,8 @@ import Link from "next/link";
 import CallButton from "@/components/CallButton";
 import SectionTitle from "@/components/SectionTitle";
 import { SITE, REGION_GROUPS, regionHref } from "@/lib/site";
-import { JsonLd, breadcrumbLd } from "@/lib/jsonld";
+import { AREAS } from "@/lib/areas";
+import { JsonLd, breadcrumbLd, itemListLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "가능지역 안내",
@@ -16,10 +17,19 @@ export default function AreasPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbLd([
-          { name: "홈", path: "/" },
-          { name: "가능지역", path: "/areas" },
-        ])}
+        data={[
+          itemListLd(
+            "파이브 마사지 가능지역",
+            AREAS.map((a) => ({
+              name: `${a.name} 출장마사지 예약 안내`,
+              path: `/areas/${a.slug}`,
+            }))
+          ),
+          breadcrumbLd([
+            { name: "홈", path: "/" },
+            { name: "가능지역", path: "/areas" },
+          ]),
+        ]}
       />
 
       <section className="border-b border-white/5">

@@ -30,6 +30,45 @@ function readingMinutes(post: Post): number {
   return Math.max(1, Math.round(chars / 500));
 }
 
+// 본문 문장 안에서 관련 지역명이 처음 등장하는 곳에 1회만 자연스럽게 링크.
+// (each region linked at most once per article — 키워드 스터핑 회피)
+function linkify(
+  text: string,
+  areas: { name: string; slug: string }[],
+  used: Set<string>
+): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  let buf = "";
+  let i = 0;
+  let key = 0;
+  const isHangul = (ch: string) => /[가-힣]/.test(ch);
+  while (i < text.length) {
+    // 앞 글자가 한글이면 단어 중간(예: '신분당선'의 '분당')이므로 링크하지 않음
+    const boundaryOk = i === 0 || !isHangul(text[i - 1]);
+    const hit = boundaryOk
+      ? areas.find((a) => !used.has(a.slug) && text.startsWith(a.name, i))
+      : undefined;
+    if (hit) {
+      if (buf) {
+        nodes.push(buf);
+        buf = "";
+      }
+      used.add(hit.slug);
+      nodes.push(
+        <Link key={`l-${key++}`} href={`/areas/${hit.slug}`}>
+          {hit.name}
+        </Link>
+      );
+      i += hit.name.length;
+    } else {
+      buf += text[i];
+      i += 1;
+    }
+  }
+  if (buf) nodes.push(buf);
+  return nodes;
+}
+
 // 관련 글: 같은 카테고리 우선, 부족하면 다른 글로 채움 (최대 3)
 function relatedPosts(post: Post): Post[] {
   const same = POSTS.filter(
@@ -52,6 +91,11 @@ export default function MagazinePostPage({
   const areaLinks = (post.areas ?? [])
     .map((slug) => getArea(slug))
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
+  // 인라인 링크용: 긴 지역명 우선 매칭(수원역 > 수원), 글당 지역별 1회
+  const inlineAreas = areaLinks
+    .map((a) => ({ name: a.name, slug: a.slug }))
+    .sort((x, y) => y.name.length - x.name.length);
+  const usedInline = new Set<string>();
 
   return (
     <ArticleLayout
@@ -156,7 +200,7 @@ export default function MagazinePostPage({
       {post.blocks.map((b, i) => (
         <div key={i}>
           {b.h2 && <h2 id={`b-${i}`}>{b.h2}</h2>}
-          {b.p && <p>{b.p}</p>}
+          {b.p && <p>{linkify(b.p, inlineAreas, usedInline)}</p>}
           {b.ul && (
             <ul>
               {b.ul.map((li) => (

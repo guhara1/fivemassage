@@ -121,6 +121,25 @@ export function articleLd({
   };
 }
 
+// 목록 페이지(가능지역·매거진)용 ItemList
+export function itemListLd(
+  name: string,
+  items: { name: string; path: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: SITE.url + it.path,
+    })),
+  };
+}
+
 export function breadcrumbLd(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
