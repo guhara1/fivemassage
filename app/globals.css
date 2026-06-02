@@ -5,6 +5,9 @@
 :root {
   --font-sans: "Pretendard", system-ui, -apple-system, "Segoe UI", Roboto,
     "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --gold: #c8a35a;
+  --gold-soft: #e0c389;
+  --ivory: #f5f1e8;
 }
 
 html {
@@ -13,10 +16,21 @@ html {
 
 body {
   background-color: #070f18;
-  color: #f5f1e8;
+  /* 깊이감을 주는 은은한 그라데이션 배경 */
+  background-image: radial-gradient(
+      900px 500px at 100% -5%,
+      rgba(200, 163, 90, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 500px at -10% 8%,
+      rgba(80, 110, 160, 0.08),
+      transparent 55%
+    );
+  background-attachment: fixed;
+  color: var(--ivory);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* 모바일 하단 고정바가 콘텐츠를 가리지 않도록 여백 확보 */
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -24,55 +38,114 @@ body {
   .container-page {
     @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
   }
-  /* 최소 터치 영역 56px 보장 */
   .tap {
     @apply min-h-[56px] inline-flex items-center justify-center;
   }
 }
 
-/* 본문 가독성 타이포그래피 (시인성·가독성 중심) */
+@layer components {
+  /* 작은 라벨 (섹션 eyebrow) */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-gold;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-gold/60;
+  }
+
+  /* 둥근 칩 */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-ivory/80;
+  }
+  .chip-gold {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/[0.08] px-3 py-1.5 text-sm font-medium text-gold;
+  }
+
+  /* 카드 (호버 리프트) */
+  .card {
+    @apply rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.045] to-white/[0.01] transition duration-200;
+  }
+  .card-hover {
+    @apply hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_18px_40px_-24px_rgba(200,163,90,0.5)];
+  }
+
+  /* 히어로 상단 골드 글로우 */
+  .hero-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      60% 80% at 78% 0%,
+      rgba(200, 163, 90, 0.16),
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+
+  /* 가운데 정렬 구분 점 */
+  .dot-sep::before {
+    content: "·";
+    @apply mx-2 text-ivory/30;
+  }
+}
+
+/* ───────────── 본문 타이포그래피 ───────────── */
 .prose {
-  font-size: 1.0625rem;
-  line-height: 1.9;
-  color: rgba(245, 241, 232, 0.82);
-  word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
+  font-size: 1.075rem;
+  line-height: 1.92;
+  color: rgba(245, 241, 232, 0.84);
+  word-break: keep-all;
   overflow-wrap: break-word;
 }
 .prose > * + * {
-  margin-top: 1.15rem;
+  margin-top: 1.2rem;
+}
+/* 리드(첫 단락) 강조 */
+.prose > p:first-of-type {
+  font-size: 1.16rem;
+  line-height: 1.85;
+  color: rgba(245, 241, 232, 0.92);
 }
 .prose h2 {
-  margin-top: 2.6rem;
-  margin-bottom: 0.2rem;
-  font-size: 1.4rem;
+  position: relative;
+  margin-top: 2.8rem;
+  margin-bottom: 0.4rem;
+  padding-left: 1rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #f5f1e8;
-  scroll-margin-top: 5rem;
+  letter-spacing: -0.015em;
+  color: #fff;
+  scroll-margin-top: 5.5rem;
 }
 .prose h2::before {
   content: "";
-  display: block;
-  width: 2.25rem;
-  height: 3px;
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 4px;
   border-radius: 9999px;
-  background: #c8a35a;
-  margin-bottom: 0.85rem;
+  background: linear-gradient(to bottom, var(--gold-soft), var(--gold));
 }
 .prose h3 {
-  margin-top: 1.8rem;
-  font-size: 1.125rem;
+  margin-top: 1.9rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #e0c389;
+  color: var(--gold-soft);
 }
 .prose strong {
-  color: #f5f1e8;
+  color: #fff;
   font-weight: 700;
 }
 .prose a {
-  color: #e0c389;
+  color: var(--gold-soft);
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration-color: rgba(200, 163, 90, 0.4);
+  text-underline-offset: 4px;
+  transition: color 0.15s;
+}
+.prose a:hover {
+  color: #fff;
 }
 .prose ul {
   list-style: none;
@@ -80,26 +153,40 @@ body {
 }
 .prose ul > li {
   position: relative;
-  padding-left: 1.35rem;
-  margin-top: 0.55rem;
+  padding-left: 1.55rem;
+  margin-top: 0.6rem;
 }
 .prose ul > li::before {
   content: "";
   position: absolute;
-  left: 0.1rem;
-  top: 0.75rem;
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background: #c8a35a;
+  left: 0.15rem;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: var(--gold);
+}
+.prose blockquote {
+  margin-left: 0;
+  border-left: 3px solid var(--gold);
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  color: rgba(245, 241, 232, 0.7);
+  font-style: italic;
 }
 .prose .callout {
-  border: 1px solid rgba(200, 163, 90, 0.35);
-  background: rgba(200, 163, 90, 0.06);
-  border-radius: 1rem;
-  padding: 1.1rem 1.25rem;
+  border: 1px solid rgba(200, 163, 90, 0.32);
+  background: linear-gradient(
+    to bottom right,
+    rgba(200, 163, 90, 0.1),
+    rgba(200, 163, 90, 0.03)
+  );
+  border-radius: 1.1rem;
+  padding: 1.25rem 1.4rem;
   font-size: 0.95rem;
-  line-height: 1.8;
-  color: rgba(245, 241, 232, 0.78);
+  line-height: 1.85;
+  color: rgba(245, 241, 232, 0.82);
 }
-
+.prose .callout strong {
+  color: var(--gold-soft);
+}

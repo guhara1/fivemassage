@@ -10,17 +10,21 @@ export default function SectionTitle({
   center?: boolean;
 }) {
   return (
-    <div className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+    <div
+      className={
+        center ? "mx-auto max-w-2xl text-center" : "max-w-3xl"
+      }
+    >
       {eyebrow && (
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+        <p className={`eyebrow mb-3 ${center ? "justify-center" : ""}`}>
           {eyebrow}
         </p>
       )}
-      <h2 className="text-2xl font-bold tracking-tight text-ivory sm:text-3xl">
+      <h2 className="text-[1.6rem] font-bold leading-tight tracking-tight text-ivory sm:text-[2rem]">
         {title}
       </h2>
       {desc && (
-        <p className="mt-3 text-sm leading-relaxed text-ivory/65 sm:text-base">
+        <p className="mt-3 text-sm leading-relaxed text-ivory/60 sm:text-base">
           {desc}
         </p>
       )}
