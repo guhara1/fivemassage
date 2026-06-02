@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import fs from "fs";
+import path from "path";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,6 +8,17 @@ import MobileBottomBar from "@/components/MobileBottomBar";
 import FloatingCall from "@/components/FloatingCall";
 import { SITE } from "@/lib/site";
 import { JsonLd, organizationLd, localBusinessLd, websiteLd } from "@/lib/jsonld";
+
+// 빌드 시점에 public/ 에 로고 파일이 있을 때만 이미지 로고를 사용한다.
+// (파일이 없으면 깨진 이미지 대신 텍스트 로고로 표시)
+function resolveLogo(): string | null {
+  const pub = path.join(process.cwd(), "public");
+  for (const name of ["logo.svg", "logo.png", "logo.webp", "logo.jpg"]) {
+    if (fs.existsSync(path.join(pub, name))) return "/" + name;
+  }
+  return null;
+}
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -31,11 +44,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const logoSrc = resolveLogo();
   return (
     <html lang="ko">
       <body className="min-h-screen">
         <JsonLd data={[organizationLd(), localBusinessLd(), websiteLd()]} />
-        <Header />
+        <Header logoSrc={logoSrc} />
         <main>{children}</main>
         <Footer />
         <MobileBottomBar />

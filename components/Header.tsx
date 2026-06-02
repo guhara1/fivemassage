@@ -34,25 +34,19 @@ const ABOUT_LINKS: MenuLink[] = [
   { label: "문의", href: "/about#info" },
 ];
 
-export default function Header() {
+export default function Header({ logoSrc }: { logoSrc?: string | null }) {
   const [open, setOpen] = useState(false); // 모바일 메뉴
   const [openGroup, setOpenGroup] = useState<string | null>(null); // 모바일 권역 아코디언
-  const [logoOk, setLogoOk] = useState(true); // /logo.png 존재 시 이미지, 실패 시 텍스트
   const close = () => setOpen(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-navy-deep/90 backdrop-blur supports-[backdrop-filter]:bg-navy-deep/75">
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2 font-bold tracking-tight" aria-label="파이브 마사지 홈">
-          {logoOk ? (
-            // 로고 업로드 시: public/logo.png 사용. 없으면 아래 텍스트 로고로 자동 대체.
+          {logoSrc ? (
+            // public/ 에 로고 파일이 있으면 빌드 시 이미지로 표시 (없으면 텍스트)
             // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src="/logo.png"
-              alt="파이브 마사지"
-              className="h-9 w-auto"
-              onError={() => setLogoOk(false)}
-            />
+            <img src={logoSrc} alt="파이브 마사지" className="h-9 w-auto" />
           ) : (
             <>
               <span className="text-gold">파이브</span>
