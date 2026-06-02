@@ -41,7 +41,7 @@ export default function Header({ logoSrc }: { logoSrc?: string | null }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-navy-deep/90 backdrop-blur supports-[backdrop-filter]:bg-navy-deep/75">
-      <div className="container-page flex h-16 items-center justify-between gap-4">
+      <div className="container-page flex h-16 items-center justify-between gap-4 sm:h-20">
         <Link href="/" className="flex items-center gap-2 font-bold tracking-tight" aria-label="파이브 마사지 홈">
           {logoSrc ? (
             // public/ 에 로고 파일이 있으면 빌드 시 이미지로 표시 (없으면 텍스트)
@@ -51,7 +51,7 @@ export default function Header({ logoSrc }: { logoSrc?: string | null }) {
               alt="파이브 마사지"
               width={640}
               height={213}
-              className="h-10 w-auto sm:h-12"
+              className="h-12 w-auto sm:h-16"
             />
           ) : (
             <>

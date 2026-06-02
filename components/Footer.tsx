@@ -13,7 +13,7 @@ export default function Footer({ logoSrc }: { logoSrc?: string | null }) {
               alt="파이브 마사지"
               width={640}
               height={213}
-              className="h-12 w-auto"
+              className="h-16 w-auto"
             />
           ) : (
             <p className="text-lg font-bold">
