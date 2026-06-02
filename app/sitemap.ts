@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { AREAS } from "@/lib/areas";
+import { POSTS } from "@/lib/magazine";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -13,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/service/process",
     "/service/notes",
     "/areas",
+    "/magazine",
     "/faq",
     "/about",
   ].map((path) => ({
@@ -29,5 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...areaRoutes];
+  const magRoutes = POSTS.map((p) => ({
+    url: `${SITE.url}/magazine/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...areaRoutes, ...magRoutes];
 }

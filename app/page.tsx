@@ -15,6 +15,7 @@ import {
   AREA_USE_CASES,
 } from "@/lib/site";
 import { JsonLd, faqLd, serviceLd, breadcrumbLd } from "@/lib/jsonld";
+import { POSTS, categoryTitle } from "@/lib/magazine";
 
 const featured = PROGRAMS.filter((p) => FEATURED_PROGRAM_SLUGS.includes(p.slug));
 
@@ -230,35 +231,28 @@ export default function Home() {
           <SectionTitle
             eyebrow="MAGAZINE"
             title="파이브 마사지 매거진"
-            desc="예약과 컨디션 관리에 도움이 되는 정보성 콘텐츠를 준비하고 있습니다."
+            desc="예약 안내가 아닌, 생활상황에 맞춘 피로 관리와 이용 정보를 다룹니다."
           />
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              "출장마사지 처음 이용 전 확인해야 할 7가지",
-              "방문 마사지 예약은 어떻게 진행될까? 전화예약 절차 안내",
-              "피로관리 목적의 방문 마사지, 어떤 기준으로 선택할까?",
-              "마사지 이용 전 준비하면 좋은 공간과 시간 체크리스트",
-              "모바일에서 빠르게 전화예약하는 방법",
-              "건전한 방문 마사지 서비스를 구분하는 기준",
-            ].map((t) => (
-              <div
-                key={t}
-                className="rounded-2xl border border-white/10 bg-white/[0.02] p-5"
+            {POSTS.slice(0, 6).map((p) => (
+              <Link
+                key={p.slug}
+                href={`/magazine/${p.slug}`}
+                className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition hover:border-gold/50"
               >
                 <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-                  GUIDE
+                  {categoryTitle(p.category)}
                 </span>
-                <p className="mt-2 font-medium leading-relaxed text-ivory/90">
-                  {t}
+                <p className="mt-2 font-medium leading-relaxed text-ivory/90 group-hover:text-gold">
+                  {p.title}
                 </p>
-                <p className="mt-3 text-xs text-ivory/40">준비 중</p>
-              </div>
+                <span className="mt-3 text-xs text-gold">자세히 보기 →</span>
+              </Link>
             ))}
           </div>
-          <p className="mt-4 text-xs text-ivory/40">
-            * 매거진은 지역명을 반복하는 양산형 글 대신, 생활상황·피로관리 중심의
-            정보성 콘텐츠로 운영합니다.
-          </p>
+          <div className="mt-6">
+            <LinkButton href="/magazine">매거진 전체보기</LinkButton>
+          </div>
         </div>
       </section>
 
