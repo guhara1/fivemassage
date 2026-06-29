@@ -1,4 +1,5 @@
 import { SITE } from "./site";
+import type { BuiltReview, Rating } from "./reviews";
 
 // 페이지에 실제로 보이는 내용과 일치시키는 것을 전제로 한 구조화 데이터 빌더.
 
@@ -18,11 +19,46 @@ export function organizationLd() {
   };
 }
 
-export function localBusinessLd() {
+// 별점·후기를 JSON-LD(AggregateRating / Review)로 변환.
+// ⚠️ 화면에 실제로 보이는 후기/별점과 동일한 값이어야 하며(lib/reviews 공용),
+// 예시 후기 단계에서는 가짜 후기 정책 위반 위험이 있으므로 실제 후기로 교체 후 운용해야 한다.
+function ratingLd(rating: Rating) {
   return {
+    "@type": "AggregateRating",
+    ratingValue: rating.ratingValue,
+    reviewCount: rating.reviewCount,
+    bestRating: rating.bestRating,
+    worstRating: rating.worstRating,
+  };
+}
+
+function reviewLd(reviews: BuiltReview[], itemName: string) {
+  return reviews.map((r) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: r.name },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: r.stars,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody: r.text,
+    itemReviewed: { "@type": "HealthAndBeautyBusiness", name: itemName },
+  }));
+}
+
+export function localBusinessLd(opts?: {
+  areaName?: string; // 지역페이지면 해당 지역명
+  rating?: Rating; // 별점 요약
+  reviews?: BuiltReview[]; // 개별 후기
+}) {
+  const name = opts?.areaName
+    ? `${SITE.name} ${opts.areaName}`
+    : SITE.name;
+  const base: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "HealthAndBeautyBusiness",
-    name: SITE.name,
+    name,
     url: SITE.url,
     telephone: SITE.phoneDisplay,
     address: {
@@ -30,10 +66,20 @@ export function localBusinessLd() {
       streetAddress: SITE.address,
       addressCountry: "KR",
     },
-    areaServed: ["수원", "동탄", "오산", "용인", "분당"],
-    description:
-      "파이브 마사지는 수원·동탄·오산·용인·분당 일부 운영지역 중심의 전화예약 방문 마사지 안내 서비스입니다.",
+    areaServed: opts?.areaName
+      ? [opts.areaName]
+      : ["수원", "동탄", "오산", "용인", "분당"],
+    description: opts?.areaName
+      ? `파이브 마사지는 ${opts.areaName} 일부 운영지역 중심의 전화예약 방문 마사지 안내 서비스입니다.`
+      : "파이브 마사지는 수원·동탄·오산·용인·분당 일부 운영지역 중심의 전화예약 방문 마사지 안내 서비스입니다.",
   };
+  if (opts?.rating && opts.rating.reviewCount > 0) {
+    base.aggregateRating = ratingLd(opts.rating);
+  }
+  if (opts?.reviews && opts.reviews.length > 0) {
+    base.review = reviewLd(opts.reviews, name);
+  }
+  return base;
 }
 
 export function websiteLd() {
