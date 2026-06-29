@@ -27,7 +27,12 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description: `${SITE.name}는 수원, 동탄, 오산, 용인, 분당 일부 운영지역 중심의 방문 마사지 전화예약 서비스를 안내합니다. 가격표, 이용절차, 가능지역을 확인하고 ${SITE.phoneDisplay}로 예약 가능 여부를 문의하세요.`,
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": `${SITE.url}/rss.xml`,
+    },
+  },
   openGraph: {
     type: "website",
     siteName: SITE.name,

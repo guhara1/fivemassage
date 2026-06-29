@@ -1,26 +1,7 @@
 // 지역페이지 이용 후기 (예시).
-// 주의: 아래 후기는 디자인용 예시이며, 실제 고객 동의 후기로 교체해야 합니다.
-// 가짜 후기 패널티를 피하기 위해 Review/AggregateRating 구조화 데이터는 의도적으로 넣지 않습니다.
-
-const NAMES = [
-  "김○○", "이○○", "박○○", "최○○", "정○○", "강○○",
-  "윤○○", "장○○", "조○○", "임○○", "한○○", "오○○",
-];
-const TAGS = [
-  "타이 건식 60분",
-  "아로마 오일 90분",
-  "시그니처 오일 90분",
-  "VVIP 전신케어 120분",
-  "타이 건식 90분",
-  "아로마 오일 60분",
-];
-const STARS = [5, 5, 4, 5, 5, 4];
-
-function seedFrom(s: string): number {
-  let n = 0;
-  for (let i = 0; i < s.length; i++) n = (n + s.charCodeAt(i)) % 997;
-  return n;
-}
+// 화면 표시 후기·별점은 lib/reviews 의 buildReviews 로 생성하며,
+// 동일 데이터를 JSON-LD(Review/AggregateRating)에도 사용해 화면-스키마 일치를 보장한다.
+import { buildReviews, aggregateRating } from "@/lib/reviews";
 
 export default function Reviews({
   areaName,
@@ -29,14 +10,21 @@ export default function Reviews({
   areaName: string;
   reviews: string[];
 }) {
-  const seed = seedFrom(areaName);
+  const built = buildReviews(areaName, reviews);
+  const rating = aggregateRating(built);
   return (
     <div>
+      {/* 평균 별점 요약 (AggregateRating 표시값과 일치) */}
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        <span className="text-2xl font-bold text-gold">
+          ★ {rating.ratingValue.toFixed(1)}
+        </span>
+        <span className="text-sm text-ivory/50">
+          / 5.0 · 후기 {rating.reviewCount}건 기준
+        </span>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {reviews.slice(0, 6).map((text, i) => {
-          const name = NAMES[(seed + i) % NAMES.length];
-          const tag = TAGS[i % TAGS.length];
-          const stars = STARS[i % STARS.length];
+        {built.map(({ name, tag, stars, text }, i) => {
           return (
             <figure key={i} className="card flex h-full flex-col p-5">
               <div className="flex items-center justify-between">

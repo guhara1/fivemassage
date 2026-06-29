@@ -14,6 +14,7 @@ import {
 } from "@/lib/site";
 import { AREAS, getArea } from "@/lib/areas";
 import { postsForArea, categoryTitle } from "@/lib/magazine";
+import { buildReviews, aggregateRating } from "@/lib/reviews";
 import { JsonLd, breadcrumbLd, faqLd, localBusinessLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
@@ -68,11 +69,19 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
   const related = sameGroup?.regions.filter((r) => r.name !== area.name) ?? [];
   const guidePosts = postsForArea(area.slug);
 
+  // 화면(Reviews 컴포넌트)에 노출되는 후기·별점과 동일한 데이터로 구조화 데이터 생성
+  const builtReviews = buildReviews(area.name, area.reviews);
+  const rating = aggregateRating(builtReviews);
+
   return (
     <>
       <JsonLd
         data={[
-          localBusinessLd(),
+          localBusinessLd({
+            areaName: area.name,
+            rating,
+            reviews: builtReviews,
+          }),
           faqLd(area.faq),
           breadcrumbLd([
             { name: "홈", path: "/" },
@@ -336,10 +345,10 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
                 <span className="text-gold/70">📍</span>
                 <span>
                   <span className="block font-semibold text-ivory/90 group-hover:text-gold">
-                    {r.name}
+                    {r.name} 출장마사지
                   </span>
                   <span className="block text-xs text-ivory/40">
-                    {area.group}
+                    {area.group} · 방문 예약 안내
                   </span>
                 </span>
               </span>
@@ -356,6 +365,48 @@ export default function AreaPage({ params }: { params: { slug: string } }) {
           <Link href="/areas" className="hover:underline">전체 가능지역 보기 →</Link>
           <Link href="/faq" className="hover:underline">자주 묻는 질문 →</Link>
         </div>
+        </div>
+      </section>
+
+      {/* ── 전 지역 롱테일 내부링크 (모든 운영지역 상호 연결) ── */}
+      <section className="border-t border-white/5 bg-white/[0.015]">
+        <div className="container-page py-14">
+          <SectionTitle
+            eyebrow="ALL AREAS"
+            title="전체 운영지역 출장마사지 예약"
+            desc="수원·동탄·오산·용인·분당 권역의 모든 운영지역 안내 페이지로 바로 이동할 수 있습니다."
+          />
+          <div className="mt-8 space-y-6">
+            {REGION_GROUPS.map((g) => (
+              <div key={g.key}>
+                <p className="text-sm font-bold text-gold">{g.title}</p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {g.regions.map((r) => {
+                    const current = r.slug === area.slug;
+                    return (
+                      <li key={r.slug}>
+                        {current ? (
+                          <span
+                            aria-current="page"
+                            className="inline-block rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-sm font-semibold text-gold"
+                          >
+                            {r.name} 출장마사지
+                          </span>
+                        ) : (
+                          <Link
+                            href={regionHref(r)}
+                            className="inline-block rounded-full border border-white/10 px-3 py-1 text-sm text-ivory/80 transition hover:border-gold/50 hover:text-ivory"
+                          >
+                            {r.name} 출장마사지
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

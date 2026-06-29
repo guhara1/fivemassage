@@ -9,7 +9,7 @@ export const SITE = {
   phoneDisplay: "0508-202-4717",
   phoneTel: "tel:05082024717",
   // 운영 도메인
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://5massage.xyz",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://fivemassage.netlify.app",
   areasShort: "수원·동탄·오산·용인·분당",
   // 콘텐츠 최종 점검일 (구조화 데이터 dateModified / 바이라인 표기용)
   updated: "2026-06-02",
